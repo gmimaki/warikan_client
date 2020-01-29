@@ -7,16 +7,19 @@ import router from './router';
 
 Vue.config.productionTip = false
 
-firebaseConfig = {
-  apiKey: "***********",
-  authDomain: "***********:",
-  databaseURL: "***********",
-  projectId: "**************",
-  storageBucket: "**********",
-  messagingSenderId: "***********:"
+const firebaseConfig = {
+  apiKey: "***",
+  authDomain: "***",
+  databaseURL: "***",
+  projectId: "***",
+  storageBucket: "***",
+  messagingSenderId: "***",
+  appId: "***",
+  measurementId: "***"
 };
 
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 new Vue({
   router,
