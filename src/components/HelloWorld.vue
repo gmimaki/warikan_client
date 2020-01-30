@@ -10,7 +10,9 @@
 		<div>
 			<button>Login</button>
 		</div>
-		<button>Google Login</button>
+		<div>
+			<button>Google Login</button>
+		</div>
 	</div>
 </template>
 
