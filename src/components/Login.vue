@@ -45,6 +45,16 @@ export default {
 		},
 		googleLogin() {
 			console.log("GOOGLE LOGIN")
+			const provider = new firebase.auth.GoogleAuthProvider()
+
+			firebase.auth().signInWithPopup(provider).then(result => {
+				console.log(result);
+				router.push('/')
+			}).catch(error => {
+				console.log(error)
+				this.errorMessage = error.message
+				this.showError = true
+			})
 		}
 	}
 }
