@@ -1,24 +1,51 @@
 <template>
-	<div class="hello">
-		<h1>{{ msg }}</h1>
+	<div class="login">
+		<h1>Login</h1>
 		<div>
-			<input type="email">
+			<input type="email" v-model="email">
 		</div>
 		<div>
-			<input type="password">
+			<input type="password" v-model="password">
 		</div>
 		<div>
-			<button>Login</button>
+			<button @click="emailLogin">Login</button>
 		</div>
-		<button>Google Login</button>
+		<div>
+			<button @click="googleLogin">Google Login</button>
+		</div>
+		<div>
+			<p>{{ errorMessage }}</p>
+		</div>
 	</div>
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import router from '../router'
+
 export default {
 	name: 'Login',
-	props: {
-		msg: String
+	data() {
+		return {
+			email: "",
+			password: "",
+			errorMessage: "",
+			showError: false
+		}
+	},
+	methods: {
+		emailLogin() {
+			firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(result => {
+				console.log(result);
+				router.push('/')
+			}).catch(error => {
+				this.errorMessage = error.message;
+				this.showError = true;
+			});
+		},
+		googleLogin() {
+			console.log("GOOGLE LOGIN")
+		}
 	}
 }
 </script>

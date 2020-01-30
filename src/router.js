@@ -23,4 +23,18 @@ const router = new Router({
     ]
 })
 
+router.beforeResolve((to, from, next) => {
+    if (to.path === "/") {
+        next()
+    } else {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                next()
+            } else {
+                next({ path: "/" })
+            }
+        })
+    }
+})
+
 export default router
