@@ -1,20 +1,30 @@
 <template>
-	<div class="hello">
-		<h1>{{ msg }}</h1>
+	<div class="createTravel">
 		<div>
-			<router-link tag="a" to="/createTravel">
-				旅行/おでかけを作成する
-			</router-link>
+			<input type="text" v-model="title">
+		</div>
+		<div>
+			<button @click="createTravel">作成</button>
 		</div>
 	</div>
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import router from '../router'
+
 export default {
-	name: 'HelloWorld',
-	props: {
-		msg: String
+	name: 'Login',
+	data() {
+		return {
+			title: ""
+		}
 	},
+	methods: {
+		createTravel() {
+			console.log("AAAAA")
+		}
+	}
 }
 </script>
 

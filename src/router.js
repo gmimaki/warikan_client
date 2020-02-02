@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import firebase from 'firebase/app'
 import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/Login.vue'
+import createTravel from './components/CreateTravel.vue'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ const router = new Router({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/createTravel',
+            name: 'createTravel',
+            component: createTravel
         }
     ]
 })
