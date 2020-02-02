@@ -22,6 +22,7 @@
 <script>
 import firebase from 'firebase/app'
 import router from '../router'
+import { getIdToken } from '../lib/auth.js';
 
 export default {
 	name: 'Login',
@@ -35,8 +36,11 @@ export default {
 	},
 	methods: {
 		emailLogin() {
-			firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(result => {
-				console.log(result);
+			firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+			.then(result => {
+				getIdToken();
+			})
+			.then(result => {
 				router.push('/')
 			}).catch(error => {
 				this.errorMessage = error.message;
@@ -44,10 +48,13 @@ export default {
 			});
 		},
 		googleLogin() {
-			console.log("GOOGLE LOGIN")
 			const provider = new firebase.auth.GoogleAuthProvider()
 
-			firebase.auth().signInWithPopup(provider).then(result => {
+			firebase.auth().signInWithPopup(provider)
+			.then((result) => {
+				getIdToken();
+			})
+			.then(result => {
 				console.log(result);
 				router.push('/')
 			}).catch(error => {
