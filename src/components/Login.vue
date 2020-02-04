@@ -22,6 +22,7 @@
 <script>
 import firebase from 'firebase/app'
 import router from '../router'
+import axios from "axios"
 import { getIdToken } from '../lib/auth.js';
 
 export default {
@@ -55,10 +56,9 @@ export default {
 				getIdToken();
 			})
 			.then(result => {
-				console.log(result);
 				router.push('/')
-			}).catch(error => {
-				console.log(error)
+			})
+			.catch(error => {
 				this.errorMessage = error.message
 				this.showError = true
 			})
