@@ -1,25 +1,29 @@
 <template>
-	<div class="hello">
-		<h1>{{ msg }}</h1>
+	<div class="invite">
 		<div>
-			<router-link tag="a" to="/createTravel">
-				旅行/おでかけを作成する
-			</router-link>
+			<input type="text" v-model="title">
 		</div>
 		<div>
-			<router-link tag="a" to="/invite">
-				パートナーを招待する
-			</router-link>
+			<button @click="createTravel">作成</button>
 		</div>
 	</div>
 </template>
 
 <script>
+import router from '../router'
+
 export default {
-	name: 'HelloWorld',
-	props: {
-		msg: String
+	name: 'Login',
+	data() {
+		return {
+			title: ""
+		}
 	},
+	methods: {
+		createTravel() {
+			console.log("AAAAA")
+		}
+	}
 }
 </script>
 

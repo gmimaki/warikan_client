@@ -4,6 +4,7 @@ import firebase from 'firebase/app'
 import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/Login.vue'
 import createTravel from './components/CreateTravel.vue'
+import invite from './components/Invite.vue'
 
 Vue.use(Router)
 
@@ -25,11 +26,18 @@ const router = new Router({
             path: '/createTravel',
             name: 'createTravel',
             component: createTravel
+        },
+        {
+            path: '/invite',
+            name: 'invite',
+            component: invite,
         }
     ]
 })
 
 router.beforeResolve((to, from, next) => {
+    next()
+        /*
     if (to.path === "/") {
         next()
     } else {
@@ -41,6 +49,7 @@ router.beforeResolve((to, from, next) => {
             }
         })
     }
+        */
 })
 
 export default router
