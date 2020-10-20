@@ -1,27 +1,47 @@
 <template>
 	<div class="invite">
 		<div>
-			<input type="text" v-model="title">
+	<!--		<input type="text" v-model="title">-->
 		</div>
 		<div>
-			<button @click="createTravel">作成</button>
+			<button @click="issueToken">招待コードを発行する</button>
+		</div>
+		<div>
+			<p>{{token}}</p>
+			<p>{{password}}</p>
 		</div>
 	</div>
 </template>
 
 <script>
 import router from '../router'
+import axios from "axios"
 
 export default {
 	name: 'Login',
 	data() {
 		return {
-			title: ""
+			token: "",
+			password: "",
 		}
 	},
 	methods: {
-		createTravel() {
-			console.log("AAAAA")
+		issueToken() {
+			axios.post("http://localhost:8080/general/invite_partner", {
+
+			}, {
+				headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*"
+				},
+				withCredentials: false
+			}).
+			then(res => {
+				console.log(res);
+			}).
+			catch(err => {
+				console.log(err);
+			})
 		}
 	}
 }
