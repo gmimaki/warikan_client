@@ -8,10 +8,7 @@
 			<input type="password" v-model="password">
 		</div>
 		<div>
-			<button @click="emailLogin">Login</button>
-		</div>
-		<div>
-			<button @click="googleLogin">Google Login</button>
+			<button @click="login">Login</button>
 		</div>
 		<div>
 			<p>{{ errorMessage }}</p>
@@ -36,31 +33,23 @@ export default {
 		}
 	},
 	methods: {
-		emailLogin() {
-			firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-			.then(result => {
-				getIdToken();
-			})
-			.then(result => {
-				router.push('/')
-			}).catch(error => {
-				this.errorMessage = error.message;
-				this.showError = true;
-			});
-		},
-		googleLogin() {
-			const provider = new firebase.auth.GoogleAuthProvider()
-
-			firebase.auth().signInWithPopup(provider)
-			.then((result) => {
-				getIdToken();
-			})
-			.then(result => {
-				router.push('/')
-			})
-			.catch(error => {
-				this.errorMessage = error.message
-				this.showError = true
+		login() {
+			axios.post("http://localhost:8080/user/login", {
+				email: this.email,
+				password: this.password,
+			}, {
+				headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "*"
+				},
+				withCredentials: false
+			}).
+			then(res => {
+				console.log(res);
+			}).
+			catch(err => {
+				console.log(err);
+				this.errorMessage = err;
 			})
 		}
 	}
