@@ -42,7 +42,7 @@ export default {
 					"Content-Type": "application/json",
 					"Access-Control-Allow-Origin": "*"
 				},
-				withCredentials: false
+				withCredentials: true
 			}).
 			then(res => {
 				console.log(res);
