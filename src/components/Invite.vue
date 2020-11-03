@@ -6,9 +6,10 @@
 		<div>
 			<button @click="issueToken">招待コードを発行する</button>
 		</div>
-		<div>
+		<div v-if="display">
 			<p>{{token}}</p>
 			<p>{{password}}</p>
+			<p>{{exipreHours}}</p>
 		</div>
 	</div>
 </template>
@@ -23,6 +24,8 @@ export default {
 		return {
 			token: "",
 			password: "",
+			exipreHours: 0,
+			display: false
 		}
 	},
 	methods: {
@@ -34,10 +37,13 @@ export default {
 					"Content-Type": "application/json",
 					"Access-Control-Allow-Origin": "*"
 				},
-				withCredentials: false
+				withCredentials: true
 			}).
 			then(res => {
-				console.log(res);
+				this.display = true;
+				this.token = res.data.token;
+				this.password = res.data.password;
+				this.exipreHours = res.data.expireHours;
 			}).
 			catch(err => {
 				console.log(err);
