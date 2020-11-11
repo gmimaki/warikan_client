@@ -46,9 +46,9 @@ export default {
 			}).
 			then(res => {
 				console.log(res);
+				router.push({ name: "index" });
 			}).
 			catch(err => {
-				console.log(err);
 				this.errorMessage = err;
 			})
 		}

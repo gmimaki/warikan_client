@@ -46,6 +46,9 @@ export default {
 				this.exipreHours = res.data.expireHours;
 			}).
 			catch(err => {
+				if (err.response.status === 401) {
+					router.push({ path: "login" });
+				}
 				console.log(err);
 			})
 		}
