@@ -5,6 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import Login from './components/Login.vue'
 import createTravel from './components/CreateTravel.vue'
 import invite from './components/Invite.vue'
+import inviter from './components/Inviter.vue'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ const router = new Router({
             path: '/invite',
             name: 'invite',
             component: invite,
+        },
+        {
+            path: '/inviter',
+            name: 'inviter',
+            component: inviter,
         }
     ]
 })
