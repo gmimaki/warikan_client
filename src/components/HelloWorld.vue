@@ -15,11 +15,15 @@
 </template>
 
 <script>
+import store from '../store/index';
 export default {
 	name: 'HelloWorld',
 	props: {
 		msg: String
 	},
+	created() {
+		console.log(store.getters.userId);
+	}
 }
 </script>
 

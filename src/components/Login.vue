@@ -21,6 +21,7 @@ import firebase from 'firebase/app'
 import router from '../router'
 import axios from "axios"
 import { getIdToken } from '../lib/auth.js';
+import store from '../store/index';
 
 export default {
 	name: 'Login',
@@ -46,6 +47,8 @@ export default {
 			}).
 			then(res => {
 				console.log(res);
+				// TODO vuex-persistedstate入れる必要あり
+				store.commit("updateUserId", res.data.userId);
 				router.push({ name: "index" });
 			}).
 			catch(err => {
