@@ -4,20 +4,11 @@
 			{{error}}
 		</div>
 		<div>
-			招待されています
-		</div>
-		<div v-if="!error">
+			<p>招待されています</p>
 			<p>招待者から共有されたパスワードを入力</p>
 			<input type="text" v-model="password">
-			<button @click="a">パスワード入力</button>
+			<button @click="inputPassword">パスワード入力</button>
 		</div>
-		<!--
-		<div v-if="display">
-			<p>{{token}}</p>
-			<p>{{password}}</p>
-			<p>{{exipreHours}}</p>
-		</div>
-		-->
 	</div>
 </template>
 
@@ -26,25 +17,27 @@ import router from '../router'
 import axios from "axios"
 
 export default {
+	// TODO loginしてたらhomeにリダイレクト
 	name: 'Inviter',
 	data() {
 		return {
 			password: "",
-			error: ""
+			error: "",
+			inviteCode: "",
 		};
 	},
 	created() {
 		const inviteCode = this.$route.query["inviteCode"];
-		if (!inviteCode) {
-			this.error = "不正な操作です";
-		}
+		if (!inviteCode) { this.error = "不正な操作です"; }
+		this.inviteCode = inviteCode;
 	},
 	methods: {
-		a() {}
-		/*
-		issueToken() {
-			axios.post("http://localhost:8080/general/invite_partner", {
-
+		inputPassword() {
+			console.log(this.inviteCode);
+			console.log(this.password);
+			axios.post("http://localhost:8080/inviter", {
+				token: this.inviteCode,
+				password: this.password,
 			}, {
 				headers: {
 					"Content-Type": "application/json",
@@ -53,19 +46,15 @@ export default {
 				withCredentials: true
 			}).
 			then(res => {
-				this.display = true;
-				this.token = res.data.token;
-				this.password = res.data.password;
-				this.exipreHours = res.data.expireHours;
+				console.log(res);
 			}).
 			catch(err => {
-				if (err.response.status === 401) {
-					router.push({ path: "login" });
+				if (err.response.status === 400) {
+					this.error = "招待コードの期限が切れているか、誤っています";
 				}
 				console.log(err);
-			})
+			});
 		}
-		*/
 	},
 }
 </script>
