@@ -22,7 +22,7 @@ export default {
 		msg: String
 	},
 	created() {
-		console.log(store.getters.userId);
+		console.log(store.getters.user);
 	}
 }
 </script>

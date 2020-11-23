@@ -44,6 +44,7 @@ const router = new Router({
 router.beforeResolve((to, from, next) => {
     next()
         /*
+        TODO ログインしてなかったらログイン画面に飛ばす制御
     if (to.path === "/") {
         next()
     } else {

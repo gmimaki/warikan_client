@@ -6,20 +6,23 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        userId: 0,
+        user: {
+            id: 0,
+            name: "",
+        }
     },
     mutations: {
-        updateUserId(state, userId) {
-            state.userId = userId;
+        updateUser(state, user) {
+            state.user = user;
         }
     },
     getters: {
-        userId(state) {
-            return state.userId;
+        user(state) {
+            return state.user;
         }
     },
     plugins: [createPersistedState({
-        key: "userId",
+        key: "user",
         storage: window.localStorage,
     })]
 });

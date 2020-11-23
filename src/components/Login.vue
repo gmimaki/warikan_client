@@ -47,8 +47,10 @@ export default {
 			}).
 			then(res => {
 				console.log(res);
-				// TODO vuex-persistedstate入れる必要あり
-				store.commit("updateUserId", res.data.userId);
+				store.commit("updateUser", {
+					id: res.data.userId,
+					name: res.data.userName,
+				});
 				router.push({ name: "index" });
 			}).
 			catch(err => {
