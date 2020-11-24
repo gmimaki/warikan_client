@@ -4,7 +4,8 @@
 			{{error}}
 		</div>
 		<div v-if="inviterName">
-			招待者: {{inviterName}}
+			<p>{{inviterName}}</p>
+			<button @click="accept">パートナーとして承認する</button>
 		</div>
 		<div v-else>
 			<p>招待されています</p>
@@ -56,6 +57,9 @@ export default {
 				}
 				console.log(err);
 			});
+		},
+		accept() {
+			// TODO 承認API
 		}
 	},
 }
