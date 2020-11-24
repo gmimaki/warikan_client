@@ -3,7 +3,10 @@
 		<div v-if="error">
 			{{error}}
 		</div>
-		<div>
+		<div v-if="inviterName">
+			招待者: {{inviterName}}
+		</div>
+		<div v-else>
 			<p>招待されています</p>
 			<p>招待者から共有されたパスワードを入力</p>
 			<input type="text" v-model="password">
@@ -24,6 +27,7 @@ export default {
 			password: "",
 			error: "",
 			inviteCode: "",
+			inviterName: "",
 		};
 	},
 	created() {
@@ -33,8 +37,6 @@ export default {
 	},
 	methods: {
 		inputPassword() {
-			console.log(this.inviteCode);
-			console.log(this.password);
 			axios.post("http://localhost:8080/inviter", {
 				token: this.inviteCode,
 				password: this.password,
@@ -46,7 +48,7 @@ export default {
 				withCredentials: true
 			}).
 			then(res => {
-				console.log(res);
+				this.inviterName = res.data.name;
 			}).
 			catch(err => {
 				if (err.response.status === 400) {

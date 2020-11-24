@@ -22,7 +22,7 @@ export default new Vuex.Store({
         }
     },
     plugins: [createPersistedState({
-        key: "user",
+        key: "warikan_gmimaki",
         storage: window.localStorage,
     })]
 });
